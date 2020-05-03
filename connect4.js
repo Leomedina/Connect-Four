@@ -7,9 +7,6 @@
 
 let currPlayer = 1; // active player: 1 or 2
 
-
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
 function findSpotForCol(x) {
     // TODO: write the real version of this, rather than always returning 0
     for (let y = HEIGHT - 1; y >= 0; y--) {
@@ -35,7 +32,16 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
     // TODO: pop up alert message
-    console.log(msg);
+    window.alert(msg);
+    location.reload();
+}
+
+const resetButton = document.querySelector('button');
+
+resetButton.addEventListener("click", resetBtn);
+
+function resetBtn(event) {
+    location.reload();
 }
 
 /** handleClick: handle click of column top to play piece */
