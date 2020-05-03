@@ -2,40 +2,88 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: whitesmoke;
 }
 /* game board table */
 body {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: stretch;
+  align-items: stretch;
   height: 100vh;
   background-color: #0d1520;
   font-family: "Montserrat";
+  color: whitesmoke;
 }
 
 h1 {
   font-size: 8em;
-  text-shadow: 3px 3px 1.2px #1c9876;
+  color: #1c9876;
+  text-shadow: 1px 1px 1.2px whitesmoke;
+}
+
+#header {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50px;
+  border-radius: 30px;
+  padding: 0.5em;
+  margin: 0.4em;
+  font-size: 1em;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  padding: 20px 40px;
+  color: whitesmoke;
+  background-color: #1c9876;
+  box-shadow: 1px 1px 1.2px whitesmoke;
+}
+
+#game {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 2em;
+  /* background-color: white    ; */
+}
+
+#board {
+  background-color: whitesmoke;
+  padding: 1em 1em 1em 1em;
+  border-radius: 50px 50px 50px 50px;
 }
 
 #board td {
   border: solid 1px #707583;
   width: 80px;
   height: 80px;
+  border-radius: 100%;
+  background-color: #0d1520;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
   /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
+  position: relative;
+  background-color: #faa52f;
+  border-radius: 100%;
+  width: 78px;
+  height: 78px;
+  
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
+.p2 {
+  background-color: blue;
+}
 
 /* column-top is table row of clickable areas for each column */
 
@@ -46,4 +94,5 @@ h1 {
 #column-top td:hover {
   background-color: #faa52f;
   border-radius: 50%;
+  border: none;
 }

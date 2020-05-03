@@ -1,30 +1,44 @@
 const WIDTH = 7;
 const HEIGHT = 6;
 
-let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
+/*
+    makeBoard: create in-JS board structure:
+    board = array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-    for (let i = 0; i <= HEIGHT; i++) {
-        for (let j = 0; j <= WIDTH; j++) {
-            board[i] = new Array(WIDTH)
+    // This for loop adds an empty array item to the board row variable 
+    // this adds the boardRow array item into the board array
+    for (let i = 0; i < HEIGHT; i++) {
+        const boardRow = []
+        for (let i = 0; i < WIDTH; i++) {
+            boardRow.push(null);
         }
+        board.push(boardRow);
     }
 }
 
-console.log(board[1][4]);
+/*
+    // CREATE TOP ROW ELEMENT: //
+    This creates a table row element, adds the id "column-top"
 
-/** makeHtmlBoard: make HTML table and row of column tops. */
+    After the for loop will then create table data elements
+*/
+
+/*
+   //  CREATE THE FOLLOWING ROWS: //
+    1. creating a row element
+    2. add items to that row element
+    3. add the index of the element as the ID
+    4. append that row element to the board
+*/
 
 function makeHtmlBoard() {
-    // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
     htmlBoard = document.querySelector("#board");
-
-    // TODO: add comment for this code
+    
+    //CREATE TOP ROW ELEMENT//
     const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
     top.addEventListener("click", handleClick);
@@ -35,8 +49,8 @@ function makeHtmlBoard() {
         top.append(headCell);
     }
     htmlBoard.append(top);
-
-    // TODO: add comment for this code
+    
+    //CREATE FOLLOWING ROWS ON THE BOARD//
     for (let y = 0; y < HEIGHT; y++) {
         const row = document.createElement("tr");
         for (let x = 0; x < WIDTH; x++) {
@@ -47,5 +61,3 @@ function makeHtmlBoard() {
         htmlBoard.append(row);
     }
 }
-
-makeHtmlBoard();

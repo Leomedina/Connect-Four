@@ -5,11 +5,19 @@
  * board fills (tie)
  */
 
+let currPlayer = 1; // active player: 1 or 2
+
+
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
     // TODO: write the real version of this, rather than always returning 0
-    return 0;
+    for (let y = HEIGHT - 1; y >= 0; y--) {
+        if (board[y][x] === null) {
+            board[y][x] = currPlayer;
+            return y;
+        }
+    }
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -17,14 +25,17 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
     // TODO: make a div and insert into correct table cell
     const newDiv = document.createElement("div");
-    
+    const getPlace = document.getElementById(`${y}-${x}`);
 
+    newDiv.classList.add("piece", `p${currPlayer}`);
+    getPlace.appendChild(newDiv);
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
     // TODO: pop up alert message
+    console.log(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -32,32 +43,36 @@ function endGame(msg) {
 function handleClick(evt) {
     // get x from ID of clicked cell
     const x = +evt.target.id;
-    console.log(x);
 
     // get next spot in column (if none, ignore click)
     const y = findSpotForCol(x);
-    if (y === null) {
+    console.log(y);
+    if (y === undefined) {
         return;
     }
 
     // place piece in board and add to HTML table
-    // TODO: add line to update in-memory board
     placeInTable(y, x);
 
+    // switch players
+    if (currPlayer === 1) {
+        currPlayer = 2;
+    } else if (currPlayer === 2) {
+        currPlayer = 1;
+    }
     // check for win
     if (checkForWin()) {
         return endGame(`Player ${currPlayer} won!`);
     }
 
     // check for tie
-    // TODO: check if all cells in board are filled; if so call, call endGame
-
-    // switch players
-    // TODO: switch currPlayer 1 <-> 2
+    if (board.every(row => row.every(cell => cell > 0))) {
+        return endGame('Tie!');
+    }
 }
 
-/** checkForWin: check board cell-by-cell for "does a win start here?" */
 
+/** checkForWin: check board cell-by-cell for "does a win start here?" */
 function checkForWin() {
     function _win(cells) {
         // Check four cells to see if they're all color of current player
