@@ -1,7 +1,7 @@
 const WIDTH = 7;
 const HEIGHT = 6;
 
-const board = []; // array of rows, each row is array of cells  (board[y][x])
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /*
     makeBoard: create in-JS board structure:
@@ -37,10 +37,24 @@ function makeBoard() {
 
 function makeHtmlBoard() {
     htmlBoard = document.querySelector("#board");
-    
+
     //CREATE TOP ROW ELEMENT//
     const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
+    top.addEventListener('mouseover', (e) => {
+        let target = e.target;
+        if (currPlayer === 1) {
+            target.style.background = "linear-gradient(to bottom right, #faa52f 40%, #A47306 100%)"
+        } else {
+            target.style.background = "linear-gradient(to bottom right, #5AABEF 5%, #274690 70%)"
+        }
+    });
+    top.addEventListener('mouseout', (e) => {
+        let target = e.target;
+        target.style.background = '#0d1520';
+    });
+
+
     top.addEventListener("click", handleClick);
 
     for (let x = 0; x < WIDTH; x++) {
@@ -49,7 +63,7 @@ function makeHtmlBoard() {
         top.append(headCell);
     }
     htmlBoard.append(top);
-    
+
     //CREATE FOLLOWING ROWS ON THE BOARD//
     for (let y = 0; y < HEIGHT; y++) {
         const row = document.createElement("tr");

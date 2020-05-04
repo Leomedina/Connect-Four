@@ -24,7 +24,7 @@ function placeInTable(y, x) {
     const newDiv = document.createElement("div");
     const getPlace = document.getElementById(`${y}-${x}`);
 
-    newDiv.classList.add("piece", `p${currPlayer}`);
+    newDiv.classList.add("piece", `p${currPlayer}`, 'drop');
     getPlace.appendChild(newDiv);
 }
 
@@ -33,15 +33,23 @@ function placeInTable(y, x) {
 function endGame(msg) {
     // TODO: pop up alert message
     window.alert(msg);
-    location.reload();
+
+    //Retrieve the HTML Board & array board
+    //delete the boards then call function to create new boards
+    htmlBoard = document.querySelector("#board");
+    htmlBoard.innerHTML = "";
+    board = [];
+    
+    makeHtmlBoard();
+    makeBoard();
 }
 
 const resetButton = document.querySelector('button');
 
 resetButton.addEventListener("click", resetBtn);
 
-function resetBtn(event) {
-    location.reload();
+function resetBtn() {
+    endGame("reset");
 }
 
 /** handleClick: handle click of column top to play piece */
