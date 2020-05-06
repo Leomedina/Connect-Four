@@ -31,11 +31,12 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-	// TODO: pop up alert message
+	// TODO: pop up alert message 
 	window.alert(msg);
 
 	//Retrieve the HTML Board & array board
 	//delete the boards then call function to create new boards
+	//create reset game func - 
 	htmlBoard = document.querySelector('#board');
 	htmlBoard.innerHTML = '';
 	board = [];
@@ -69,12 +70,13 @@ function handleClick(evt) {
 	placeInTable(y, x);
 
 	// switch players
+	// ? operator for short-hand (good for small else if or if)
 	if (currPlayer === 1) {
 		currPlayer = 2;
 	} else if (currPlayer === 2) {
 		currPlayer = 1;
 	}
-	// check for win
+	// check for win // optimze af
 	if (checkForWin()) {
 		return endGame(`Player ${currPlayer} won!`);
 	}
@@ -99,6 +101,7 @@ function checkForWin() {
 
 	for (let y = 0; y < HEIGHT; y++) {
 		for (let x = 0; x < WIDTH; x++) {
+			//check if not empty then continue
 			let horiz = [
 				[y, x],
 				[y, x + 1],
@@ -133,3 +136,5 @@ function checkForWin() {
 
 makeBoard();
 makeHtmlBoard();
+//make smaller functions
+//a good function should be one screen don't scroll

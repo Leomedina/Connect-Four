@@ -44,6 +44,7 @@ function makeHtmlBoard() {
 	top.addEventListener('mouseover', (e) => {
 		let target = e.target;
 		if (currPlayer === 1) {
+			//make css class add toggle
 			target.style.background = 'linear-gradient(to bottom right, #faa52f 40%, #A47306 100%)';
 		} else {
 			target.style.background = 'linear-gradient(to bottom right, #5AABEF 5%, #274690 70%)';
@@ -55,7 +56,7 @@ function makeHtmlBoard() {
 	});
 
 	top.addEventListener('click', handleClick);
-
+	//too much code in 1 function, separate into multiple funcs
 	for (let x = 0; x < WIDTH; x++) {
 		const headCell = document.createElement('td');
 		headCell.setAttribute('id', x);
